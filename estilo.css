@@ -1,0 +1,36 @@
+body {
+  background: #fdf6fb;
+  font-family: Arial, sans-serif;
+}
+h1, h2, h3 {
+  color: #b05aa8;
+  text-align: center;
+}
+.malla {
+  display: grid;
+  gap: 20px;
+  padding: 20px;
+}
+.ano {
+  border: 2px solid #f2cfe0;
+  border-radius: 8px;
+  padding: 10px;
+  background: #fff;
+}
+.semestre {
+  margin: 10px 0;
+}
+.curso {
+  border: 1px solid #f2cfe0;
+  background: #ffeaff;
+  margin: 5px;
+  padding: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  position: relative;
+}
+.curso.completed {
+  background: #ffd6f0;
+  text-decoration: line-through;
+  color: #888;
+}
