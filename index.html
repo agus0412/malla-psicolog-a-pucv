@@ -1,144 +1,171 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Malla Interactiva Psicología</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Malla Psicología PUCV Interactiva</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background: #f9f9f9;
+    }
+    h1 {
+      text-align: center;
+    }
+    .semestre {
+      margin-bottom: 30px;
+    }
+    .ramo {
+      padding: 10px;
+      margin: 5px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: #fff;
+      cursor: pointer;
+    }
+    .ramo.completed {
+      background-color: #c8e6c9;
+      text-decoration: line-through;
+    }
+    .ramo.locked {
+      background-color: #eeeeee;
+      color: #999;
+      pointer-events: none;
+    }
+  </style>
 </head>
 <body>
-  <h1>Malla de la Carrera de Psicología</h1>
-  <div class="malla">
+  <h1>Malla Psicología PUCV Interactiva</h1>
+  <div id="malla"></div>
 
-    <!-- Primer Año -->
-    <div class="ano" id="ano1">
-      <h2>Primer Año</h2>
-      <div class="semestre" id="ano1sem1">
-        <h3>Semestre 1</h3>
-        <div class="curso" data-next="">
-          FILOSOFÍA
-        </div>
-        <div class="curso" data-next="metodologia_cualitativa metodologia_cuantitativa">
-          INTRODUCCIÓN A LA INVESTIGACIÓN EN CIENCIAS SOCIALES
-        </div>
-        <div class="curso" data-next="">
-          HISTORIA DE LA PSICOLOGÍA
-        </div>
-        <div class="curso" data-next="">
-          ANTROPOLOGÍA CULTURAL
-        </div>
-        <div class="curso" data-next="">
-          TEORÍA SOCIAL Y MUNDO CONTEMPORÁNEO
-        </div>
-        <div class="curso" data-next="">
-          ANTROPOLOGÍA CRISTIANA
-        </div>
-      </div>
-      <div class="semestre" id="ano1sem2">
-        <h3>Semestre 2</h3>
-        <div class="curso" data-next="ingles2">
-          INGLÉS 1
-        </div>
-        <div class="curso" data-next="">
-          PROCESOS PSICOLÓGICOS
-        </div>
-        <div class="curso" data-next="neuropsicologia2">
-          NEUROPSICOLOGÍA 1
-        </div>
-        <div class="curso" data-next="psicologia_social2">
-          PSICOLOGÍA SOCIAL 1
-        </div>
-        <div class="curso" data-next="">
-          EPISTEMOLOGÍA PSICOLÓGICA
-        </div>
-        <div class="curso" data-next="">
-          METODOLOGÍA DE LA INVESTIGACIÓN CUALITATIVA
-        </div>
-        <div class="curso" data-next="">
-          ÉTICA CRISTIANA
-        </div>
-      </div>
-    </div>
+  <script>
+    const malla = {
+      "Primer año": {
+        "Semestre 1": [
+          { nombre: "FILOSOFIA" },
+          { nombre: "INTRODUCCION A LA INVESTIGACION EN CIENCIAS SOCIALES", desbloquea: ["METODOLOGIA DE LA INVESTIGACION CUALITATIVA", "METODOLOGIA DE LA INVESTIGACION CUANTITATIVA"] },
+          { nombre: "HISTORIA DE LA PSICOLOGIA" },
+          { nombre: "ANTROPOLOGIA CULTURAL" },
+          { nombre: "TEORIA SOCIAL Y MUNDO CONTEMPORANEO" },
+          { nombre: "ANTROPOLPGÍA CRISTIANA" }
+        ],
+        "Semestre 2": [
+          { nombre: "INGLES 1", desbloquea: ["INGLES 2"] },
+          { nombre: "PROCESOS PSICOLOGICOS" },
+          { nombre: "NEUROPSICOLOGIA 1", desbloquea: ["NEUROPSICOLOGIA 2"] },
+          { nombre: "PSICOLOGIA SOCIAL 1", desbloquea: ["PSICOLOGIA SOCIAL 2"] },
+          { nombre: "EPISTEMOLOGIA PSICOLOGICA" },
+          { nombre: "METODOLOGIA DE LA INVESTIGACION CUALITATIVA" },
+          { nombre: "ÉTICA CRISTIANA" }
+        ]
+      },
+      "Segundo año": {
+        "Tercer semestre": [
+          { nombre: "INGLES 2", desbloquea: ["INGLES 3"] },
+          { nombre: "PSICOPATOLOGIA 1", desbloquea: ["PSICOPATOLOGIA 2"] },
+          { nombre: "PSICOLOGIA DEL DESARROLLO" },
+          { nombre: "PSICOLOGIA SOCIAL 2" },
+          { nombre: "NEUROPSICOLOGIA 2" },
+          { nombre: "METODOLOGIA DE LA INVESTIGACION CUANTITATIVA", desbloquea: ["TALLER DE INVESTIGACION"] },
+          { nombre: "PSICOMETRIA 1", desbloquea: ["PSICOMETRIA 2"] }
+        ],
+        "Cuarto semestre": [
+          { nombre: "INGLES 3", desbloquea: ["INGLES 4"] },
+          { nombre: "PSICOPATOLOGIA 2" },
+          { nombre: "PSICOLOGIA DEL DESARROLLO 2" },
+          { nombre: "PSICOLOGIA DEL APRENDIZAJE", desbloquea: ["PSICOLOGIA EDUCACIONAL 1"] },
+          { nombre: "PSICOLOGIA DEL TRABAJO Y DE LAS ORGANIZACIONES", desbloquea: ["COMPORTAMIENTO HUMANO EN LAS ORGANIZACIONES"] },
+          { nombre: "PSICOMETRIA 2" }
+        ]
+      },
+      "Tercer año": {
+        "Quinto semestre": [
+          { nombre: "INGLES 4" },
+          { nombre: "PSICOLOGIA EDUCACIONAL 1", desbloquea: ["PSICOLOGIA EDUCACIONAL 2"] },
+          { nombre: "COMPORTAMIENTO HUMANO EN LAS ORGANIZACIONES", desbloquea: ["GESTION DE RECURSOS HUMANOS"] },
+          { nombre: "FUNDAMENTOS CONCEPTUALES DE LA CLINICA PSICOANALITICA", desbloquea: ["FUNDAMENTOS CONCEPTUALES DE LA CLINICA SISTEMICA", "FUNDAMENTOS CONCEPTUALES DE LA CLINICA INFANTO JUVENIL"] },
+          { nombre: "FUNDAMENTOS CONCEPTUALES DE LA CLINICA COGNITIVA" },
+          { nombre: "ANALISIS DE PROBLEMAS PSICOSOCIALES", desbloquea: ["TALLER DE INVESTIGACION"] }
+        ],
+        "Sexto semestre": [
+          { nombre: "TALLER DE INVESTIGACION" },
+          { nombre: "PSICOLOGIA EDUCACIONAL 2", desbloquea: ["TALLER EDUCACIONAL 1"] },
+          { nombre: "FUNDAMENTOS CONCEPTUALES DE LA CLINICA SISTEMICA", desbloquea: ["TALLER CLINICO 1"] },
+          { nombre: "FUNDAMENTOS CONCEPTUALES DE LA CLINICA INFANTO JUVENIL" },
+          { nombre: "GESTION DE RECURSOS HUMANOS", desbloquea: ["TALLER DE ANALISIS DE LAS ORGANIZACIONES"] }
+        ]
+      },
+      "Cuarto año": {
+        "Séptimo semestre": [
+          { nombre: "TALLER EDUCACIONAL 1", desbloquea: ["TALLER EDUCACIONAL 2"] },
+          { nombre: "TALLER DE ANALISIS DE LAS ORGANIZACIONES", desbloquea: ["TALLER DE CAMBIO EN LAS ORGANIZACIONES"] },
+          { nombre: "TALLER CLINICO 1", desbloquea: ["TALLER CLINICO 2"] }
+        ],
+        "Octavo semestre": [
+          { nombre: "TALLER EDUCACIONAL 2", desbloquea: ["PRACTICA PROFESIONAL"] },
+          { nombre: "TALLER DE CAMBIO EN LAS ORGANIZACIONES", desbloquea: ["SEMINARIO DE TESIS"] },
+          { nombre: "TALLER CLINICO 2" }
+        ]
+      },
+      "Quinto año": {
+        "Noveno semestre": [
+          { nombre: "SEMINARIO DE TESIS", desbloquea: ["TESIS"] },
+          { nombre: "PRACTICA PROFESIONAL" }
+        ],
+        "Decimo semestre": [
+          { nombre: "TESIS" }
+        ]
+      }
+    };
 
-    <!-- Segundo Año -->
-    <div class="ano" id="ano2">
-      <h2>Segundo Año</h2>
-      <div class="semestre" id="ano2sem3">
-        <h3>Tercer Semestre</h3>
-        <div class="curso" data-next="ingles3">INGLÉS 2</div>
-        <div class="curso" data-next="psicopatologia2">PSICOPATOLOGÍA 1</div>
-        <div class="curso" data-next="">PSICOLOGÍA DEL DESARROLLO</div>
-        <div class="curso" data-next="">PSICOLOGÍA SOCIAL 2</div>
-        <div class="curso" data-next="">NEUROPSICOLOGÍA 2</div>
-        <div class="curso" data-next="taller_investigacion">METODOLOGÍA DE LA INVESTIGACIÓN CUANTITATIVA</div>
-        <div class="curso" data-next="psicometria2">PSICOMETRÍA 1</div>
-      </div>
-      <div class="semestre" id="ano2sem4">
-        <h3>Cuarto Semestre</h3>
-        <div class="curso" data-next="ingles4">INGLÉS 3</div>
-        <div class="curso" data-next="">PSICOPATOLOGÍA 2</div>
-        <div class="curso" data-next="">PSICOLOGÍA DEL DESARROLLO 2</div>
-        <div class="curso" data-next="psicologia_educacional1">PSICOLOGÍA DEL APRENDIZAJE</div>
-        <div class="curso" data-next="comportamiento_humano">PSICOLOGÍA DEL TRABAJO Y DE LAS ORGANIZACIONES</div>
-        <div class="curso" data-next="">PSICOMETRÍA 2</div>
-      </div>
-    </div>
+    const estadoRamos = {};
 
-    <!-- Tercer Año -->
-    <div class="ano" id="ano3">
-      <h2>Tercer Año</h2>
-      <div class="semestre" id="ano3sem5">
-        <h3>Quinto Semestre</h3>
-        <div class="curso" data-next="">INGLÉS 4</div>
-        <div class="curso" data-next="psicologia_educacional2">PSICOLOGÍA EDUCACIONAL 1</div>
-        <div class="curso" data-next="gestion_rrhh">COMPORTAMIENTO HUMANO EN LAS ORGANIZACIONES</div>
-        <div class="curso" data-next="clinic_sistemica clinic_infanto juvenil">FUNDAMENTOS CONCEPTUALES DE LA CLÍNICA PSICOANALÍTICA</div>
-        <div class="curso" data-next="">FUNDAMENTOS CONCEPTUALES DE LA CLÍNICA COGNITIVA</div>
-        <div class="curso" data-next="taller_investigacion">ANÁLISIS DE PROBLEMAS PSICOSOCIALES</div>
-      </div>
-      <div class="semestre" id="ano3sem6">
-        <h3>Sexto Semestre</h3>
-        <div class="curso" data-next="">TALLER DE INVESTIGACIÓN</div>
-        <div class="curso" data-next="taller_educacional1">PSICOLOGÍA EDUCACIONAL 2</div>
-        <div class="curso" data-next="taller_clinico">FUNDAMENTOS CONCEPTUALES DE LA CLÍNICA SISTÉMICA</div>
-        <div class="curso" data-next="">FUNDAMENTOS CONCEPTUALES DE LA CLÍNICA INFANTO JUVENIL</div>
-        <div class="curso" data-next="analisis_organizaciones">GESTIÓN DE RECURSOS HUMANOS</div>
-      </div>
-    </div>
+    function renderMalla() {
+      const container = document.getElementById("malla");
+      container.innerHTML = "";
 
-    <!-- Cuarto Año -->
-    <div class="ano" id="ano4">
-      <h2>Cuarto Año</h2>
-      <div class="semestre" id="ano4sem7">
-        <h3>Séptimo Semestre</h3>
-        <div class="curso" data-next="taller_educacional2">TALLER EDUCACIONAL 1</div>
-        <div class="curso" data-next="taller_cambio">TALLER DE ANÁLISIS DE LAS ORGANIZACIONES</div>
-        <div class="curso" data-next="taller_clinico2">TALLER CLÍNICO 1</div>
-      </div>
-      <div class="semestre" id="ano4sem8">
-        <h3>Octavo Semestre</h3>
-        <div class="curso" data-next="practica_profesional">TALLER EDUCACIONAL 2</div>
-        <div class="curso" data-next="seminario_tesis">TALLER DE CAMBIO EN LAS ORGANIZACIONES</div>
-        <div class="curso" data-next="">TALLER CLÍNICO 2</div>
-      </div>
-    </div>
+      for (const [anio, semestres] of Object.entries(malla)) {
+        const anioDiv = document.createElement("div");
+        anioDiv.className = "anio";
+        const h2 = document.createElement("h2");
+        h2.textContent = anio;
+        anioDiv.appendChild(h2);
 
-    <!-- Quinto Año -->
-    <div class="ano" id="ano5">
-      <h2>Quinto Año</h2>
-      <div class="semestre" id="ano5sem9">
-        <h3>Noveno Semestre</h3>
-        <div class="curso" data-next="tesis">SEMINARIO DE TESIS</div>
-        <div class="curso" data-next="">PRÁCTICA PROFESIONAL</div>
-      </div>
-      <div class="semestre" id="ano5sem10">
-        <h3>Décimo Semestre</h3>
-        <div class="curso" data-next="">TESIS</div>
-      </div>
-    </div>
+        for (const [semestre, ramos] of Object.entries(semestres)) {
+          const semestreDiv = document.createElement("div");
+          semestreDiv.className = "semestre";
+          const h3 = document.createElement("h3");
+          h3.textContent = semestre;
+          semestreDiv.appendChild(h3);
 
-  </div>
+          for (const ramo of ramos) {
+            if (!estadoRamos[ramo.nombre]) {
+              estadoRamos[ramo.nombre] = ramo.desbloquea ? "locked" : "available";
+            }
+            const div = document.createElement("div");
+            div.className = `ramo ${estadoRamos[ramo.nombre]}`;
+            div.textContent = ramo.nombre;
+            div.onclick = () => marcarCompleto(ramo);
+            semestreDiv.appendChild(div);
+          }
+          anioDiv.appendChild(semestreDiv);
+        }
+        container.appendChild(anioDiv);
+      }
+    }
 
-  <script src="script.js"></script>
+    function marcarCompleto(ramo) {
+      estadoRamos[ramo.nombre] = "completed";
+      if (ramo.desbloquea) {
+        for (const desbloqueado of ramo.desbloquea) {
+          estadoRamos[desbloqueado] = "available";
+        }
+      }
+      renderMalla();
+    }
+
+    renderMalla();
+  </script>
 </body>
 </html>
